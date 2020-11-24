@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}- List{% endblock %}
+
+{% block content %}
+
+    <br>
+    <div style="text-align: center"><h2>QNA</h2></div>
+
+    <div class="btn-group">
+
+</div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default"
+                 style="height: 400px">
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성일자</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in photos %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td> <a href="{% url 'photo:photo_detail' pk=post.id %}"> {{ post.title }} </a> </td>
+                            <td> {{post.author.username}} </td>
+                            <td> {{post.created}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+                {% if photos.has_previous %}
+                    <a href="?page={{ photos.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">{{ photos.number }} of {{ photos.paginator.num_pages }}.</span>
+
+                {% if photos.has_next %}
+                    <a href="?page={{ photos.next_page_number }}">next</a>
+                {% endif %}
+                <a href="{% url 'photo:photo_upload' %}" class="btn btn-outline-danger float-right"> 문의하기</a>
+            <br>
+            <br>
+            <div class="col-md-2"></div>
+        </div>
+     </div>
+
+{% endblock %}
+
+

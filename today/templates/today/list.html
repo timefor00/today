@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Category Page{% endblock %}
+{% block content %}
+    <br>
+        <div>
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                     <a class="nav-link {% if not current_category %}active{% endif %}" href="{% url 'today:product_all' %}">All</a>
+                </li>
+                {% for c in categories %}
+            <li class="nav-item">
+                 <a class="nav-link {% if current_category.slug == c.slug %}active{% endif %}" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+
+            <br>
+
+                <div class="row">
+                <!--어떤 카테고리를 선택하면 그 카테고리에 포함되어 있는 상품들을 표시하는 부분-->
+                    {% for product in products %}
+                        <div class="col-4" style="width: 600px">
+                            <div class="card">
+                                {% if product.image %}
+                                    <img class="card-img=top" src="{{ product.image.url }}" alt="Product Image" style="height: 200px;">
+                                {% endif %}
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">{{ product.desription }}<span class="badge badge-secondary">${{ product.price }}</span></p>
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">View Detail</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+<br>
+
+
+
+{% endblock %}

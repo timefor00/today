@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}- Registration Done{% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default"
+        style="height: 200px; margin-top: 20px">
+            <div class="alert alert-secondary">성공적으로 가입하셨습니다. Welcome, {{new_user.username}}</div>
+            <a class="btn btn-outline-info" href="/">홈으로 돌아가기</a>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+{% endblock %}

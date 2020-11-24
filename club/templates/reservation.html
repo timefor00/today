@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/club.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="jumbotron" style=background-color:#FAE0D4; >
+  <h1>STUDIO 예약</h1>
+<br>
+  <h5>날짜를 선택한 후 예약해주세요</h5>
+  <p> Pink : 예약가능  <br> White : 예약불가 </p>
+<br>
+  <table style="background-color: beige">
+    <tr>
+      <td>날짜</td>
+      <td>10-11시</td>
+      <td>11-12시</td>
+      <td>12-13시</td>
+      <td>13-14시</td>
+      <td>14-15시</td>
+      <td>15-16시</td>
+      <td>16-17시</td>
+      <td>17-18시</td>
+      <td>18-19시</td>
+      <td>19-20시</td>
+      <td>20-21시</td>
+    </tr>
+  {% for date in reservation_date %}
+  <tr>
+    <td><a href="reservation/{{date.day_id}}">{{date.Date}}</a></td>
+    <td class = 'time'>{{date.T10_11}}</td>
+    <td class = 'time'>{{date.T11_12}}</td>
+    <td class = 'time'>{{date.T12_13}}</td>
+    <td class = 'time'>{{date.T13_14}}</td>
+    <td class = 'time'>{{date.T14_15}}</td>
+    <td class = 'time'>{{date.T15_16}}</td>
+    <td class = 'time'>{{date.T16_17}}</td>
+    <td class = 'time'>{{date.T17_18}}</td>
+    <td class = 'time'>{{date.T18_19}}</td>
+    <td class = 'time'>{{date.T19_20}}</td>
+    <td class = 'time'>{{date.T20_21}}</td>
+  </tr>
+  {% endfor %}
+  </table>
+
+  </form>
+  <script>
+  var x = document.getElementsByClassName("time");
+  for (var i = 0; i < x.length; i++) {
+  if (x[i].textContent.includes('open'))
+      x[i].style.backgroundColor = '#FFA7A7'
+  else if (x[i].textContent.includes('closed'))
+      x[i].style.backgroundColor = '#D8D8D8'
+
+  else
+      x[i].style.backgroundColor = "white"
+      x[i].innerHTML = ""
+  }
+
+  </script>
+    </div>
+  {% endblock %}

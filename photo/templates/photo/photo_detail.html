@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{object.text|truncatechars:10}}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default">
+                <br>
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <p> 작성자 : {{object.author.username}}</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title"> {{object.title|linebreaksbr}} </h5>
+                        <p class="card-text"> {{object.text|linebreaksbr}} </p>
+                        <p><img src="{{object.photo.url}}" style="width:100%;"></p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <p> 작성일 : {{object.created}}</p>
+                        <p> 수정일 : {{object.updated}}</p>
+                    </div>
+                </div>
+                <br>
+                <a class="btn btn-outline-danger btn-sm float-right" href="{% url 'photo:add_comment_to_photo' pk=photo.pk %}" style="margin: 5px;">Add comment</a>
+                {% if object.author.id == user.id %}
+                <a href="{% url 'photo:photo_update' pk=object.id %}" class="btn btn-outline-danger btn-sm float-right" style="margin: 5px;">Update</a>
+                {% endif %}
+                <br>
+                <br>
+                <hr>
+                {% for comment in photo.comments.all %}
+                    <div class="comment">
+                        <div class="date">{{ comment.comment_author }} | {{ comment.created_date }}</div>
+                        <p>{{ comment.comment_text|linebreaks }}</p>
+                    </div>
+                {% empty %}
+                    <p>No comments here yet :(</p>
+                {% endfor %}
+                <hr>
+                <br>
+            </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 panel panel-default">
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+{% endblock %}

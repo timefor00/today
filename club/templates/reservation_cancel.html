@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron" style=background-color:#FAE0D4; >
+<h1 style="text-align: center">예약 취소 </h1>
+<form method="post">
+<div  style="margin:0 auto;text-align:center" >
+  {% csrf_token %}
+  {{form.your_code.label}}<br>
+  {{form.your_code}}<br>
+  {{form.your_email.label}}<br>
+  {{form.your_email}}<br>
+  <p style="color:red">{{message}}</p>
+  <button type="submit" style=height:50px;width:200px;>예약취소</button>
+</div>
+</form>
+</div>
+{% endblock %}

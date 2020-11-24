@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Product Detail{% endblock %}
+{% block content %}
+<br>
+    <div class="container" style="margin-bottom: 50px;">
+        <div class="row">
+            <div class="col-4">
+                <img src="{{product.image.url}}" width="100%">
+            </div>
+            <div class="col">
+                <h1 class="display-6" style="color: crimson">{{product.name}}</h1>
+                <p><span class="badge badge-secondary">가격</span> {{product.price}} 원</p>
+                <p><span class="badge badge-secondary">사진관 설명</span>{{product.description|linebreaks}}</p>
+                <br>
+                <form action="{% url 'cart:product_add' product.id %}" method="post">
+                    {{ add_to_cart }}
+                    {% csrf_token %}
+                    <input type="submit" class="btb btn-info btn-sm" style="width: 80px" value="찜하기">
+                </form>
+                <a href="{% url 'club:reservation' %}"><input type="button" class="btb btn-info btn-sm" style="width: 80px" value="예약하기"></a>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="alert alert-danger"> [ REVIEW ]
+    <div class="card" style="margin-top: 20px; margin-bottom: 20px">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 panel panel-default"
+                 style="height: 250px">
+            <br>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">제목</th>
+                        <th scope="col">작성자</th>
+                        <th scope="col">작성날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for post in reviews %}
+                    <tr><td> <a href="{% url 'today:review_detail' pk=post.id %}">
+                     {{post.title}} </a> </td>
+                    <td> {{post.author.username}} </td>
+                    <td> {{post.created}} </td>
+                    </tr>
+                      {% endfor %}
+                </tbody>
+            </table>
+                <a href="{% url 'today:review_upload' %}" class="btn btn-outline-danger float-right"> 리뷰작성</a>
+
+            <br>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+     </div>
+    </div>
+
+
+
+<br>
+
+{% endblock %}

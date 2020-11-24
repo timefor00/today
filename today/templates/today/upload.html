@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+- Upload
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 panel panel-default">
+        <br><br>
+        <div class="card ">
+            <h5 class="card-header" align="right"> 리뷰작성 </h5>
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {{form.as_p}}
+                    {% csrf_token %}
+                    <br>
+                    <input type="submit" class="btn btn-outline-danger float-right" value="게시하기">
+                </form>
+            </div>
+        </div>
+        <br><br>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+{% endblock %}

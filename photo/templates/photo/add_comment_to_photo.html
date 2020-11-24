@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <br>
+    <h2>댓글 달기</h2>
+    <br>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-outline-danger">Send</button>
+    </form>
+{% endblock %}

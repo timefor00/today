@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}- Login{% endblock %}
+
+{% block content %}
+<div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 panel panel-default"
+            style="height: 300px; margin-top: 20px" >
+            <div class="alert alert-secondary">
+                로그인 정보를 입력해주세요.</div>
+            <form action="" method="post">
+                {{form.as_p}}
+                {% csrf_token %}
+              <br>
+                <input class="btn btn-outline-info" type="submit" value="Login">
+
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+</div>
+{% endblock %}
